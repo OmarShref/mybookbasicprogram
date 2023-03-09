@@ -104,3 +104,8 @@ const deleteBook = (id) => {
     })
     .catch((err) => console.log(err));
 };
+
+const search = () => {
+  let text = document.getElementById("search").value;
+  console.log(text);
+};

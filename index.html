@@ -19,6 +19,12 @@
         <label for="genre">Genre</label>
         <input type="text" id="genre" placeholder="book genre" />
         <button onclick="addBook()">Add Book</button>
+        <input
+          id="search"
+          oninput="search()"
+          type="text"
+          placeholder="search by title"
+        />
       </div>
       <div id="books-container"></div>
     </div>
