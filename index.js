@@ -84,7 +84,7 @@ const addBook = async () => {
 };
 
 const deleteBook = (id) => {
-  fetch("http://localhost:7000/deletebook", {
+  fetch("http://localhost:7000", {
     method: "DELETE",
     credentials: "include",
     headers: {
