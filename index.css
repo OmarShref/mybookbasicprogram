@@ -44,18 +44,22 @@ input {
 .book-card {
   position: relative;
   width: 120px;
-  border: 2px solid gray;
   padding: 10px;
   padding-top: 18px;
+  overflow: hidden;
+  border: 2px solid gray;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
+.book-card p {
+  font-size: medium;
+}
 .delete-button {
   font-size: 10px;
-  padding: 0px;
+  padding: 1px;
   position: absolute;
   top: 5px;
   right: 5px;

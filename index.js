@@ -1,20 +1,32 @@
+const BASIC_URL = "http://localhost:7000";
+
 const getBooks = async () => {
   let books = [];
-  await fetch("http://localhost:7000", { credentials: "include" })
+  await fetch(BASIC_URL, { credentials: "include" })
     .then((response) => response.json())
     .then((data) => {
       books = data;
     })
     .catch((err) => console.log(err));
   console.log(books);
+  booksList = books;
   return books;
 };
 
+let booksList = getBooks();
+
 const viewBooks = async () => {
+  await getBooks();
+  let text = document.getElementById("search").value;
+  let filteredBooks = booksList.filter((book) =>
+    book.title.toLowerCase().includes(text.toLowerCase())
+  );
+
   const booksContainer = document.getElementById("books-container");
   const wrapperDiv = document.createElement("div");
   let booksCounter = 0;
-  for (const book of await getBooks()) {
+
+  for (const book of filteredBooks) {
     booksCounter++;
     const bookDiv = document.createElement("div");
 
@@ -54,10 +66,10 @@ const viewBooks = async () => {
 };
 
 const addBook = async () => {
-  const title = document.getElementById("title").value;
-  const author = document.getElementById("author").value;
-  const genre = document.getElementById("genre").value;
-  await fetch("http://localhost:7000", {
+  const title = document.getElementById("title");
+  const author = document.getElementById("author");
+  const genre = document.getElementById("genre");
+  await fetch(BASIC_URL, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -65,14 +77,17 @@ const addBook = async () => {
     },
     referrerPolicy: "no-referrer",
     body: JSON.stringify({
-      title: title,
-      author: author,
-      genre: genre,
+      title: title.value,
+      author: author.value,
+      genre: genre.value,
     }),
   })
     .then(async (res) => {
       if (res.status === 201) {
         viewBooks();
+        title.value = "";
+        author.value = "";
+        genre.value = "";
       } else if (res.status === 200) {
         const json = await res.json();
         alert(json.details[0].message);
@@ -84,7 +99,7 @@ const addBook = async () => {
 };
 
 const deleteBook = (id) => {
-  fetch("http://localhost:7000", {
+  fetch(BASIC_URL, {
     method: "DELETE",
     credentials: "include",
     headers: {
@@ -103,9 +118,4 @@ const deleteBook = (id) => {
       }
     })
     .catch((err) => console.log(err));
-};
-
-const search = () => {
-  let text = document.getElementById("search").value;
-  console.log(text);
 };
