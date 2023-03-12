@@ -80,6 +80,8 @@ const addBook = async () => {
       title: title.value,
       author: author.value,
       genre: genre.value,
+      cover:
+        "https://taralazar.files.wordpress.com/2015/05/wolfie.jpg?w=350&h=353",
     }),
   })
     .then(async (res) => {
