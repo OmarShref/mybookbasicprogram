@@ -91,8 +91,7 @@ const addBook = async () => {
         author.value = "";
         genre.value = "";
       } else if (res.status === 200) {
-        const json = await res.json();
-        alert(json.details[0].message);
+        alert("Please, make sure all fields are filled correctly");
       } else {
         alert("Sorry Error happened please try again");
       }
